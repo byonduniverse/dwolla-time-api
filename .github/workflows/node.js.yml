@@ -21,4 +21,6 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
       - run: npm install
+      - name: Ensure Jest is executable
+        run: chmod +x ./node_modules/.bin/jest
       - run: npm test
