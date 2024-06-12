@@ -12,6 +12,10 @@ app.get("/time", (req, res) => {
 
   if (timezone) {
     try {
+      const isValidTimezone = moment.tz.zone(timezone);
+      if (!isValidTimezone) {
+        throw new Error("Invalid timezone");
+      }
       const adjustedTime = moment.tz(timezone).format();
       response.adjustedTime = adjustedTime;
     } catch (e) {
