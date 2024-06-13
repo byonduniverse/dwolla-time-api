@@ -26,8 +26,13 @@ app.get("/time", (req, res) => {
   res.json(response);
 });
 
-app.listen(port, () => {
-  console.log(`Server running at http://localhost:${port}/`);
-});
+let server;
+if (require.main === module) {
+  server = app.listen(port, () => {
+    console.log(`Server running at http://localhost:${port}/`);
+  });
+} else {
+  server = app.listen();
+}
 
-module.exports = app;
+module.exports = { app, server };
