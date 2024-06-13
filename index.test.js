@@ -1,7 +1,11 @@
 const request = require("supertest");
-const app = require("./index");
+const { app, server } = require("./index");
 
 describe("GET /time", () => {
+  afterAll((done) => {
+    server.close(done);
+  });
+
   it("should return the current time in UTC", async () => {
     const response = await request(app).get("/time");
     expect(response.status).toBe(200);
